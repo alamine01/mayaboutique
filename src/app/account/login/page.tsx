@@ -9,9 +9,14 @@ import Link from 'next/link';
 import styles from './Login.module.css';
 
 export default function LoginPage() {
-    const { loginWithGoogle, user } = useAuth();
+    const { loginWithGoogle, loginWithEmail, user } = useAuth();
     const router = useRouter();
     const [loading, setLoading] = useState(false);
+    const [error, setError] = useState("");
+    const [formData, setFormData] = useState({
+        email: "",
+        password: ""
+    });
 
     useEffect(() => {
         if (user) {
@@ -23,11 +28,35 @@ export default function LoginPage() {
 
     const handleGoogleLogin = async () => {
         setLoading(true);
+        setError("");
         try {
             await loginWithGoogle();
             router.push('/account');
         } catch (error) {
-            // Gérer l'erreur silencieusement ou ajouter un état d'erreur UI futur
+            console.error("Google login error:", error);
+            setError("Impossible de se connecter avec Google.");
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleEmailLogin = async (e: React.FormEvent) => {
+        e.preventDefault();
+        setLoading(true);
+        setError("");
+
+        try {
+            await loginWithEmail(formData.email, formData.password);
+            router.push('/account');
+        } catch (err: any) {
+            console.error("Email login error:", err);
+            if (err.code === 'auth/invalid-credential' || err.code === 'auth/user-not-found' || err.code === 'auth/wrong-password') {
+                setError("Email ou mot de passe incorrect.");
+            } else if (err.code === 'auth/too-many-requests') {
+                setError("Trop de tentatives. Veuillez réessayer plus tard.");
+            } else {
+                setError("Une erreur est survenue lors de la connexion.");
+            }
         } finally {
             setLoading(false);
         }
@@ -69,24 +98,50 @@ export default function LoginPage() {
                     <span>ou avec votre email</span>
                 </div>
 
-                <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+                {error && (
+                    <div style={{
+                        backgroundColor: '#ffebee',
+                        color: '#c62828',
+                        padding: '10px',
+                        borderRadius: '8px',
+                        marginBottom: '1rem',
+                        fontSize: '0.9rem',
+                        textAlign: 'center'
+                    }}>
+                        {error}
+                    </div>
+                )}
+
+                <form className={styles.form} onSubmit={handleEmailLogin}>
                     <div className={styles.formGroup}>
                         <label>Email</label>
                         <div className={styles.inputWrapper}>
                             <Mail size={18} />
-                            <input type="email" placeholder="votre@email.com" />
+                            <input
+                                type="email"
+                                placeholder="votre@email.com"
+                                required
+                                value={formData.email}
+                                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                            />
                         </div>
                     </div>
                     <div className={styles.formGroup}>
                         <label>Mot de passe</label>
                         <div className={styles.inputWrapper}>
                             <Lock size={18} />
-                            <input type="password" placeholder="••••••••" />
+                            <input
+                                type="password"
+                                placeholder="••••••••"
+                                required
+                                value={formData.password}
+                                onChange={(e) => setFormData({ ...formData, password: e.target.value })}
+                            />
                         </div>
                     </div>
 
-                    <button className="btn btn-primary" style={{ width: '100%' }}>
-                        Se connecter <LogIn size={18} />
+                    <button className="btn btn-primary" style={{ width: '100%' }} disabled={loading}>
+                        {loading ? "Connexion..." : "Se connecter"} <LogIn size={18} />
                     </button>
                 </form>
 
