@@ -21,7 +21,6 @@ export default function CheckoutPage() {
                 window.location.href = url;
             }
         } catch (error) {
-            console.error(error);
             alert("Une erreur est survenue lors de l'initialisation du paiement.");
         } finally {
             setLoading(false);

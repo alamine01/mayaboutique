@@ -48,7 +48,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             await signInWithPopup(auth, provider);
         } catch (error) {
-            console.error("Erreur connexion Google:", error);
             throw error;
         }
     };
@@ -58,7 +57,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
             const res = await createUserWithEmailAndPassword(auth, email, pass);
             await updateProfile(res.user, { displayName: name });
         } catch (error) {
-            console.error("Erreur inscription:", error);
             throw error;
         }
     };
@@ -67,7 +65,6 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             await signInWithEmailAndPassword(auth, email, pass);
         } catch (error) {
-            console.error("Erreur connexion Email:", error);
             throw error;
         }
     };
@@ -76,7 +73,7 @@ export const AuthProvider = ({ children }: { children: ReactNode }) => {
         try {
             await signOut(auth);
         } catch (error) {
-            console.error("Erreur déconnexion:", error);
+            // Ignorer les erreurs de déconnexion
         }
     };
 

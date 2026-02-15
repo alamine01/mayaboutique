@@ -27,7 +27,7 @@ export default function LoginPage() {
             await loginWithGoogle();
             router.push('/account');
         } catch (error) {
-            console.error(error);
+            // Gérer l'erreur silencieusement ou ajouter un état d'erreur UI futur
         } finally {
             setLoading(false);
         }

@@ -38,7 +38,6 @@ export async function createCheckoutSession(items: CartItem[]) {
 
         return { sessionId: session.id, url: session.url };
     } catch (error: any) {
-        console.error("Stripe Error:", error);
         throw new Error(error.message);
     }
 }

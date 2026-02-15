@@ -48,7 +48,7 @@ export default function RegisterPage() {
             await loginWithGoogle();
             router.push('/account');
         } catch (err) {
-            console.error(err);
+            // Erreur gérée ou ignorée
         } finally {
             setLoading(false);
         }
