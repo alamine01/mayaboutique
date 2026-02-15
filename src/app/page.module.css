@@ -153,6 +153,42 @@
 
   .grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    /* Réduire l'espace entre les cartes */
+  }
+
+  .categoryCard {
+    padding: 1rem 0.75rem;
+    /* Padding réduit */
+  }
+
+  .iconCircle {
+    width: 45px;
+    /* Icône plus petite */
+    height: 45px;
+    margin-bottom: 0.75rem;
+  }
+
+  .categoryCard h3 {
+    font-size: 1rem;
+    /* Titre plus petit */
+    margin-bottom: 0.5rem;
+  }
+
+  .categoryCard p {
+    font-size: 0.8rem;
+    /* Description plus petite */
+    line-height: 1.4;
+    margin-bottom: 1rem;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    /* Limiter à 2 lignes */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .cardCta {
+    font-size: 0.75rem;
   }
 }
 
