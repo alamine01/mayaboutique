@@ -103,10 +103,10 @@ export default function AccountPage() {
                                         <tbody>
                                             {orders.map((order) => (
                                                 <tr key={order.id}>
-                                                    <td className={styles.orderId}>{order.id}</td>
-                                                    <td className={styles.date}>{order.date}</td>
-                                                    <td className={styles.total}>{order.total} €</td>
-                                                    <td>
+                                                    <td className={styles.orderId} data-label="Commande">{order.id}</td>
+                                                    <td className={styles.date} data-label="Date">{order.date}</td>
+                                                    <td className={styles.total} data-label="Total">{order.total} €</td>
+                                                    <td data-label="Statut">
                                                         <span
                                                             className={styles.statusBadge}
                                                             style={{

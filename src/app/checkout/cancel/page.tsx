@@ -7,7 +7,7 @@ export default function CancelPage() {
             <span style={{ fontSize: '4rem' }}>🛒</span>
             <h1>Commande annulée</h1>
             <p>Votre paiement n'a pas été finalisé. Vos articles sont toujours dans votre panier.</p>
-            <div style={{ display: 'flex', gap: '1rem', justifyContent: 'center' }}>
+            <div className={styles.actionButtons}>
                 <Link href="/checkout" className="btn btn-primary">
                     Retour au paiement
                 </Link>
