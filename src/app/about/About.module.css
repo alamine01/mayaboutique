@@ -1,5 +1,6 @@
 .aboutPage {
-    padding: 8rem 0;
+    padding-top: 8rem;
+    padding-bottom: 8rem;
 }
 
 .header {
@@ -126,11 +127,6 @@
     overflow: hidden;
 }
 
-@media (prefers-color-scheme: dark) {
-    .mission {
-        background: #1a1a1a;
-    }
-}
 
 .mission h2 {
     font-size: 2rem;
@@ -155,7 +151,8 @@
 
 @media (max-width: 768px) {
     .aboutPage {
-        padding: 6rem 0;
+        padding-top: 6rem;
+        padding-bottom: 6rem;
     }
 
     .header {

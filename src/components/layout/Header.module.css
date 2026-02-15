@@ -27,19 +27,13 @@
 
 .headerScrolled {
     height: 70px;
-    background: rgba(255, 255, 255, 0.82);
+    background: #ffffff;
     backdrop-filter: blur(16px);
     -webkit-backdrop-filter: blur(16px);
     box-shadow: var(--shadow-sm);
     border-bottom: 1px solid rgba(0, 0, 0, 0.05);
 }
 
-@media (prefers-color-scheme: dark) {
-    .headerScrolled {
-        background: rgba(13, 13, 13, 0.85);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    }
-}
 
 .headerContainer {
     display: flex;
@@ -124,11 +118,6 @@
     color: var(--primary-red);
 }
 
-@media (prefers-color-scheme: dark) {
-    .actionBtn:hover {
-        background: rgba(255, 255, 255, 0.1);
-    }
-}
 
 .cartCount {
     position: absolute;
